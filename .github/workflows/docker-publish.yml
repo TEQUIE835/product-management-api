@@ -28,9 +28,12 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       # 3️⃣ Configurar variables
-      - name: Set up variables
+      - name: Set up variables (force lowercase)
         id: vars
-        run: echo "IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/product-management-api" >> $GITHUB_ENV
+        run: |
+         owner_lower=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+         echo "IMAGE_NAME=ghcr.io/${owner_lower}/product-management-api" >> $GITHUB_ENV
+
 
       # 4️⃣ Construir la imagen
       - name: Build Docker image
