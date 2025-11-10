@@ -1,0 +1,18 @@
+﻿version: '3.9'
+
+services:
+  productmanagement.api:
+    image: productmanagement.api
+    container_name: productmanagement_api
+    build:
+      context: .
+      dockerfile: productManagement.Api/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - SQL_CONNECTION=${SQL_CONNECTION}
+      - SECRET_KEY=${SECRET_KEY}
+      - ISSUER=${ISSUER}
+      - AUDIENCE=${AUDIENCE}
+ 

@@ -1,0 +1,58 @@
+﻿# === .NET build artifacts ===
+**/bin/
+**/obj/
+**/out/
+
+# === IDE / Editor ===
+.vs/
+.idea/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.iml
+**/*.dbmdl
+**/*.jfm
+**/.project
+**/.settings
+**/.toolstarget
+
+# === Logs / Temp ===
+*.log
+TestResults/
+*.coverage
+*.coveragexml
+*.trx
+*.tmp
+*.temp
+
+# === Configuration / Secrets ===
+**/appsettings.*.json
+**/secrets.dev.yaml
+**/values.dev.yaml
+.env
+
+# === Dependency caches ===
+packages/
+.nuget/
+node_modules/
+npm-debug.log*
+
+# === OS / Misc ===
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+ca.pem
+
+# === Excluded project files ===
+**/*.*proj.user
+**/azds.yaml
+charts/
+
+# === Keep Docker build files ===
+# ⚠️ No ignores for these so the build works
+#!**/Dockerfile*
+#!**/docker-compose*
