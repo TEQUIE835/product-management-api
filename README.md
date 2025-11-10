@@ -37,7 +37,7 @@ product-management-api/
 ## ⚙️ Requisitos Previos
 
 - [.NET SDK 9.0+](https://dotnet.microsoft.com/)
-- [PostgreSQL](https://www.postgresql.org/) (u otro motor compatible)
+- [MySql](https://www.mysql.com/) (u otro motor compatible)
 - (Opcional) [Docker](https://www.docker.com/) para ejecución en contenedor
 
 ---
