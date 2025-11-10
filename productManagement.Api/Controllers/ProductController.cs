@@ -22,6 +22,7 @@ public class ProductController : ControllerBase
     /// <summary>
     /// Obtiene la lista completa de productos registrados.
     /// </summary>
+    [HttpGet]
     public async Task<IActionResult> GetProducts()
     {
         try
