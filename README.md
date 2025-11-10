@@ -46,18 +46,18 @@ product-management-api/
 
 ### 1️⃣ Clonar el repositorio
 
-´´´
+```
 git clone https://github.com/TEQUIE835/product-management-api.git
 cd product-management-api
 # Nota: ejecutar los siguientes comandos desde la carpeta ProductManagement.Api
-´´´
+```
 
 ### 2️⃣ Configurar las variables de entorno
 
 Ejemplo de `appsettings.json` (o usa variables de entorno).  
 He agregado comentarios dentro para indicar qué debes modificar.
 
-´´´
+```
 {
   "ConnectionStrings": {
     "DefaultConnection": "Host=localhost;Database=product_management;Username=postgres;Password=yourpassword"
@@ -68,15 +68,15 @@ He agregado comentarios dentro para indicar qué debes modificar.
     "Audience": "ProductManagementClient"
   }
 }
-´´´
+```
 
 ### 3️⃣ Ejecutar migraciones y correr la API
 
-´´´
+```
 cd ProductManagement.Api
 dotnet ef database update
 dotnet run
-´´´
+```
 
 La API se iniciará en:  
 - https://localhost:5001/swagger → Swagger UI  
@@ -120,11 +120,10 @@ La API se iniciará en:
 
 ## 🐳 Ejecución con Docker
 
-´´´
+```
 docker build -t product-management-api .
 docker run -p 8080:8080 product-management-api
-´´´
-
+```
 ---
 
 ## ☁️ Despliegue en Render (opcional)
