@@ -1,0 +1,42 @@
+name: Publish Docker image to GHCR
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      # 1️⃣ Clonar el repositorio
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2️⃣ Iniciar sesión en GitHub Container Registry
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # 3️⃣ Configurar variables
+      - name: Set up variables
+        id: vars
+        run: echo "IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/product-management-api" >> $GITHUB_ENV
+
+      # 4️⃣ Construir la imagen
+      - name: Build Docker image
+        run: docker build -t $IMAGE_NAME:latest -f productManagement.Api/Dockerfile .
+
+      # 5️⃣ Subir la imagen al registro
+      - name: Push Docker image
+        run: |
+          docker push $IMAGE_NAME:latest
