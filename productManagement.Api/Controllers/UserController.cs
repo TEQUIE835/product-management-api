@@ -17,6 +17,9 @@ public class UserController : ControllerBase
         _userService = userService;
     }
 
+    /// <summary>
+    /// Obtiene la lista de todos los usuarios registrados (solo para administradores).
+    /// </summary>
     [HttpGet]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> GetAll()
@@ -32,6 +35,10 @@ public class UserController : ControllerBase
         }
     }
 
+    
+    /// <summary>
+    /// Obtiene la información de un usuario específico por su ID.
+    /// </summary>
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
@@ -46,6 +53,10 @@ public class UserController : ControllerBase
         }
     }
 
+    
+    /// <summary>
+    /// Actualiza los datos de un usuario existente.
+    /// </summary>
     [HttpPut("id")]
     public async Task<IActionResult> UpdateAsync(int id, [FromBody] User user)
     {
@@ -60,6 +71,9 @@ public class UserController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Elimina un usuario del sistema (solo para administradores).
+    /// </summary>
     [HttpDelete("id")]
     public async Task<IActionResult> DeleteAsync(int id)
     {

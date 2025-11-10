@@ -15,6 +15,10 @@ public class AuthController : ControllerBase
         _authService = authService;
     }
 
+    /// <summary>
+    /// Registra un nuevo usuario en el sistema con rol asignado.
+    /// </summary>
+
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterRequestDto request)
     {
@@ -29,6 +33,9 @@ public class AuthController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Inicia sesión de usuario y genera un token JWT.
+    /// </summary>
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginRequestDto request)
     {

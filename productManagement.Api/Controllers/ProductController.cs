@@ -19,6 +19,9 @@ public class ProductController : ControllerBase
         _productService = productService;
     }
 
+    /// <summary>
+    /// Obtiene la lista completa de productos registrados.
+    /// </summary>
     public async Task<IActionResult> GetProducts()
     {
         try
@@ -32,6 +35,9 @@ public class ProductController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Obtiene los detalles de un producto específico por su ID.
+    /// </summary>
     [HttpGet("{id}")]
     public async Task<IActionResult> GetProduct(int id)
     {
@@ -46,6 +52,10 @@ public class ProductController : ControllerBase
         }
     }
 
+    
+    /// <summary>
+    /// Crea un nuevo producto en el sistema (solo rol Admin).
+    /// </summary>
     [HttpPost]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> CreateProduct([FromBody] Product product)
@@ -60,6 +70,11 @@ public class ProductController : ControllerBase
             return BadRequest(e.Message);
         }
     }
+
+    
+    /// <summary>
+    /// Actualiza la información de un producto existente.
+    /// </summary>
 
     [HttpPut("{id}")]
     [Authorize(Roles = "Admin")]
@@ -76,6 +91,10 @@ public class ProductController : ControllerBase
         }
     }
 
+    
+    /// <summary>
+    /// Elimina un producto del sistema (solo rol Admin).
+    /// </summary>
     [HttpDelete("{id}")]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> DeleteProduct(int id)
