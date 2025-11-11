@@ -1,3 +1,5 @@
+using AutoMapper;
+using productManagement.Application.DTOs.Users;
 using productManagement.Application.Interfaces.Users;
 using productManagement.Domain.Entities;
 using productManagement.Domain.Interfaces;
@@ -7,29 +9,31 @@ namespace productManagement.Application.Services.Users;
 public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
+    private readonly IMapper _mapper;
 
     public UserService(IUserRepository userRepository)
     {
         _userRepository = userRepository;
     }
 
-    public async Task<IEnumerable<User>> GetAllUsers()
+    public async Task<IEnumerable<UserResponseDto>> GetAllUsers()
     {
-        return await _userRepository.GetAllUsers();
+        var users = await _userRepository.GetAllUsers();
+        return _mapper.Map<IEnumerable<UserResponseDto>>(users);
     }
 
-    public async Task<User?> GetUserById(int id)
+    public async Task<UserResponseDto?> GetUserById(int id)
     {
         var user = await _userRepository.GetUserById(id);
         if (user == null) throw new ArgumentException("User not found");
-        return user;
+        return _mapper.Map<UserResponseDto>(user);
     }
 
-    public async Task<User?> GetUserByUsername(string username)
+    public async Task<UserResponseDto?> GetUserByUsername(string username)
     {
         var user = await _userRepository.GetUserByUsername(username);
         if (user == null) throw new ArgumentException("User not found");
-        return user;
+        return _mapper.Map<UserResponseDto>(user);
     }
 
     public async Task UpdateAsync(int id, User user)

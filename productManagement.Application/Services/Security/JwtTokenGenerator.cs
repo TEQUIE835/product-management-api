@@ -14,7 +14,7 @@ public class JwtTokenGenerator :IJwtTokenGenerator
     {
         _configuration = configuration;
     }
-    public (string token, DateTime expiresAt) GenerateToken(string userId, string username, string role)
+    public (string token, DateTime expiresAt) GenerateAccessToken(string userId, string username, string role)
     {
         
         var jwtKey = _configuration["Jwt:Key"] 
@@ -29,7 +29,7 @@ public class JwtTokenGenerator :IJwtTokenGenerator
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-        var expiresAt = DateTime.UtcNow.AddHours(2);
+        var expiresAt = DateTime.UtcNow.AddMinutes(7);
         
         var claims = new[]
         {

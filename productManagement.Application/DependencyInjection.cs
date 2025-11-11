@@ -7,10 +7,14 @@ using productManagement.Application.Interfaces.Auth;
 using productManagement.Application.Interfaces.Products;
 using productManagement.Application.Interfaces.Security;
 using productManagement.Application.Interfaces.Users;
+using productManagement.Application.Mappings.Users;
 using productManagement.Application.Services.Auth;
 using productManagement.Application.Services.Products;
 using productManagement.Application.Services.Security;
 using productManagement.Application.Services.Users;
+using System;
+using System.Reflection;
+
 
 namespace productManagement.Application;
 
@@ -18,11 +22,13 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IProductService, ProductService>();
         services.AddScoped<IUserService, UserService>();
         AddJwtAuthentication(services, configuration);
+        
 
         return services;
     }

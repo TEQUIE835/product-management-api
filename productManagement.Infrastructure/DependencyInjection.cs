@@ -19,6 +19,7 @@ public static class DependencyInjection
             , ServerVersion.AutoDetect(connectionString)));
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<IAuthRepository, AuthRepository>();
         return services;
     }
 }

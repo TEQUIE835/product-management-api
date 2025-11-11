@@ -8,11 +8,12 @@ public class AuthServiceTest
 {
      private readonly Mock<IUserRepository> _userRepoMock = new();
     private readonly Mock<IJwtTokenGenerator> _jwtMock = new();
+    private readonly Mock<IAuthRepository> _authRepoMock = new();
     private readonly AuthService _authService;
 
     public AuthServiceTest()
     {
-        _authService = new AuthService(_jwtMock.Object, _userRepoMock.Object);
+        _authService = new AuthService(_jwtMock.Object, _userRepoMock.Object,  _authRepoMock.Object);
     }
 
     [Fact]
@@ -41,14 +42,14 @@ public class AuthServiceTest
         };
 
         _userRepoMock.Setup(r => r.GetUserByUsername("john")).ReturnsAsync(user);
-        _jwtMock.Setup(j => j.GenerateToken(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+        _jwtMock.Setup(j => j.GenerateAccessToken(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
             .Returns(("token123", DateTime.UtcNow.AddHours(1)));
 
         var dto = new LoginRequestDto { Username = "john", Password = "1234" };
 
         var result = await _authService.LoginAsync(dto);
 
-        result.Token.Should().Be("token123");
+        result.AccessToken.Should().Be("token123");
     }
 
     [Fact]
